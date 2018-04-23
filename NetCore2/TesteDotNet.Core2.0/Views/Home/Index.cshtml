@@ -1,4 +1,6 @@
-﻿@{
+﻿@model TesteDotNet.Core2._0.Models.CadastroViewModel;
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -21,6 +23,8 @@
     <a href="Home/Cadastro" class="btn btn-primary pull-right h2">Novo Item</a>
 </div>
 
+
+
 <div id="list" class="row margin-top-100">
     <div class="table-responsive col-md-12">
         <table class="table table-striped">
@@ -34,17 +38,21 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1001</td>
-                    <td>Lorem ipsum dolor sit amet</td>
-                    <td>Lorem ipsum dolor sit amet</td>
-                    <td>01/01/2015</td>
-                    <td class="actions">
-                        <a class="btn btn-success btn-xs" href="Home/Detalhe">Visualizar</a>
-                        <a class="btn btn-warning btn-xs" href="Home/Cadastro">Editar</a>
-                        <a class="btn btn-danger btn-xs" href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-                    </td>
-                </tr>
+                @{  foreach (var item in Model.Itens)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td>@item.CategorieID</td>
+                            <td>01/01/2015</td>
+                            <td class="actions">
+                                <a class="btn btn-success btn-xs" href="Home/Detalhe">Visualizar</a>
+                                <a class="btn btn-warning btn-xs" href="Home/Cadastro">Editar</a>
+                                <a class="btn btn-danger btn-xs" href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
+                            </td>
+                        </tr>
+                    }
+                }
             </tbody>
         </table>
     </div>

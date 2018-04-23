@@ -14,6 +14,8 @@ namespace TesteDotNet.Core2._0.Models
 
         public Item Item { get; set; }
 
+        public List<Item> Itens { get; set; }
+
         [DisplayName("Categoria")]
         public Category Category { get; set; }
     }

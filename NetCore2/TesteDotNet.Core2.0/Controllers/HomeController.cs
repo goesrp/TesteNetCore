@@ -19,7 +19,8 @@ namespace TesteDotNet.Core2._0.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(ListarItens());
+            
         }
 
         public IActionResult Cadastro()
@@ -52,5 +53,12 @@ namespace TesteDotNet.Core2._0.Controllers
             return cadastroViewModel;
         }
 
+        public CadastroViewModel ListarItens()
+        {
+            CadastroViewModel cadastroViewModel = new CadastroViewModel();
+            cadastroViewModel.Itens = new SqlDataAccess(_context).ListarItens();
+
+            return cadastroViewModel;
+        }
     }
 }
