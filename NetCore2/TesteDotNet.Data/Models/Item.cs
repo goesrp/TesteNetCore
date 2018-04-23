@@ -11,6 +11,5 @@ namespace TesteDotNet.Data.Models
         public string Description { get; set; }
         public int CategorieID { get; set; }
 
-        public ICollection<Category> Categories { get; set; }
     }
 }

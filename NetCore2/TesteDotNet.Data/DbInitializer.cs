@@ -21,7 +21,7 @@ namespace TesteDotNet.Data
             var Categories = new Category[]
             {
                 new Category{CategoryName="Categoria 1"},
-                new  Category{CategoryName="Categoria 2"},
+                new Category{CategoryName="Categoria 2"},
                 new Category{CategoryName="Categoria 3"}
             };
 
