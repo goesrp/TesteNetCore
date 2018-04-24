@@ -1,13 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace TesteDotNet.Data.Models
 {
-    public class Category
+ 
+
+    [Table("Category")]
+    public partial class Category
     {
-       public int Id { get; set; }
-       public string CategoryName { get; set; }
+
+        public int Id { get; set; }
+
+        [StringLength(20)]
+        public string CategoryName { get; set; }
+
 
     }
 }

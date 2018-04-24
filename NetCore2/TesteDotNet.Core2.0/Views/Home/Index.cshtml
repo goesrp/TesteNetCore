@@ -40,17 +40,29 @@
             <tbody>
                 @{  foreach (var item in Model.Itens)
                     {
-                        <tr>
-                            <td>@item.Id</td>
-                            <td>@item.Name</td>
-                            <td>@item.CategorieID</td>
-                            <td>01/01/2015</td>
-                            <td class="actions">
-                                <a class="btn btn-success btn-xs" href="Home/Detalhe">Visualizar</a>
-                                <a class="btn btn-warning btn-xs" href="Home/Cadastro">Editar</a>
-                                <a class="btn btn-danger btn-xs" href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-                            </td>
-                        </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Categories.Where(x => x.Id == item.CategoryID).FirstOrDefault().CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateDate)
+                    </td>
+                    <td class="actions">
+                        @*<a class="btn btn-success btn-xs" href="Home/Detalhe">Visualizar</a>
+                        <a class="btn btn-warning btn-xs" href="Home/Cadastro">Editar</a>
+                        <a class="btn btn-danger btn-xs" href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>*@
+                       
+                        @Html.ActionLink("Visualizar", "Detalhe", new { id = item.Id }, new { @class = "btn btn-success btn-xs" }) |
+                        @Html.ActionLink("Editar", "Editar", new { id = item.Id }, new { @class = "btn btn-warning btn-xs" }) |
+                        @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })
+                    </td>
+                </tr>
                     }
                 }
             </tbody>
