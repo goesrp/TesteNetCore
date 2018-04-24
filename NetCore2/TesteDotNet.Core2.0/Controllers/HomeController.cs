@@ -75,21 +75,21 @@ namespace TesteDotNet.Core2._0.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditarItem(Item item)
+        public ActionResult EditarItem(CadastroViewModel model)
         {
+            Item _item = model.Item;
             if (ModelState.IsValid)
             {
-                _context.Attach(item);
-                _context.Entry(item).State = EntityState.Modified;
+                _context.Attach(_item);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryID = new SelectList(_context.Categories, "Id", "CategoryName", item.CategoryID);
+            ViewBag.CategoryID = new SelectList(_context.Categories, "Id", "CategoryName", _item.CategoryID);
 
             CadastroViewModel cadastroViewModel = new CadastroViewModel();
             cadastroViewModel.Categories = ListarCategorias().Categories;
-            cadastroViewModel.Item = item;
+            cadastroViewModel.Item = _item;
 
             return View(cadastroViewModel);
         }
@@ -114,9 +114,9 @@ namespace TesteDotNet.Core2._0.Controllers
             return View(cadastroViewModel);
         }
 
-        public ActionResult Apagar(int? id)
+        public ActionResult Apagar(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new BadRequestResult();
             }
@@ -125,16 +125,17 @@ namespace TesteDotNet.Core2._0.Controllers
             {
                 return new NotFoundResult();
             }
-            return View(item);
+
+            CadastroViewModel cadastroViewModel = new CadastroViewModel();
+            cadastroViewModel.Categories = ListarCategorias().Categories;
+            cadastroViewModel.Item = item;
+
+            return View(cadastroViewModel);
         }
 
-        // POST: Items/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult ApagarConfirma(int id)
+        public ActionResult ApagarConfirma(int? id)
         {
-            Item item = _context.Items.Find(id);
-            _context.Items.Remove(item);
+            _context.Items.Remove(_context.Items.Find(id));
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
